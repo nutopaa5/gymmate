@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,6 +17,7 @@ import hh.swd20.gymmate.domain.StyleRepository;
 import hh.swd20.gymmate.domain.WorkoutRepository;
 import hh.swd20.gymmate.domain.Workout;
 
+@Controller
 public class WorkoutController {
 
 	@Autowired
@@ -32,7 +34,7 @@ public class WorkoutController {
     
     // Homepage
     @RequestMapping(value="/workoutlist", method = RequestMethod.GET)
-    public String bookList(Model model) {	
+    public String workoutList(Model model) {	
         model.addAttribute("workouts", repository.findAll());
         return "workoutlist";
     }

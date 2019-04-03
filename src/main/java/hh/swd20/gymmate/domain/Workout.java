@@ -17,7 +17,7 @@ public class Workout {
 	// attribuutit
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private Long workoutid;
+	private long workoutid;
 	private String title;
 	private String description;
 	private String instructions;
@@ -70,6 +70,9 @@ public class Workout {
 	}
 	
 	//setterit
+	public void setId(long workoutid) {
+		this.workoutid = workoutid;
+	}
 	public void setTitle(String title) {
 		this.title = title;
 	}
