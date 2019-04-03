@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 public class Style {
 	
@@ -18,6 +20,7 @@ public class Style {
 	private String name;
 	
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "style")
+	@JsonIgnore
 	private List<Workout> workouts;
 	
 	public Style() {

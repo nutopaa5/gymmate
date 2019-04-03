@@ -17,13 +17,13 @@ public class Workout {
 	// attribuutit
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long workoutid;
+	private Long workoutid;
 	private String title;
 	private String description;
 	private String instructions;
 	private String duration;
-	private String thumbup;
-	private String thumbdown;
+	private long thumbup;
+	private long thumbdown;
 		
 	@ManyToOne
 	@JsonIgnore
@@ -35,7 +35,7 @@ public class Workout {
 		// parametritön konstruktori
 	}
 		
-	public Workout(String title, String description, String instructions, String duration, String thumbup, String thumbdown) {
+	public Workout(String title, String description, String instructions, String duration, long thumbup, long thumbdown, Style style) {
 		super();
 		this.title = title;
 		this.description = description;
@@ -43,8 +43,9 @@ public class Workout {
 		this.duration = duration;
 		this.thumbup = thumbup;
 		this.thumbdown = thumbdown;
+		this.style = style;
 	}
-
+	
 	// getterit
 	public long getWorkoutid() {
 		return workoutid;
@@ -64,10 +65,9 @@ public class Workout {
 	public String getDuration() {
 		return duration;
 	}
-	public String getThumbup() {
+	public long getThumbup() {
 		return thumbup;
 	}
-	
 	
 	//setterit
 	public void setTitle(String title) {
@@ -82,13 +82,13 @@ public class Workout {
 	public void setDuration(String duration) {
 		this.duration = duration;
 	}
-	public void setThumbup(String thumbup) {
+	public void setThumbup(long thumbup) {
 		this.thumbup = thumbup;
 	}
-	public String getThumbdown() {
+	public long getThumbdown() {
 		return thumbdown;
 	}
-	public void setThumbdown(String thumbdown) {
+	public void setThumbdown(long thumbdown) {
 		this.thumbdown = thumbdown;
 	}
 	
@@ -103,9 +103,14 @@ public class Workout {
 	// muut methodit
 	@Override
 	public String toString() {
-		return "Workout [workoutid=" + workoutid + ", title=" + title + ", description=" + description
-				+ ", instructions=" + instructions + ", duration=" + duration + ", thumbup=" + thumbup + ", thumbdown="
-				+ thumbdown + ", style=" + style + "]";
+		if (this.style != null)
+			return "Workout [workoutid=" + workoutid + ", title=" + title + ", description=" + description
+			+ ", instructions=" + instructions + ", duration=" + duration + ", thumbup=" + thumbup + ", thumbdown="
+			+ thumbdown + ", style=" + this.getStyle() + "]";
+		else
+			return "Workout [workoutid=" + workoutid + ", title=" + title + ", description=" + description
+			+ ", instructions=" + instructions + ", duration=" + duration + ", thumbup=" + thumbup + ", thumbdown="
+			+ thumbdown + "]";
 	}
 		
 }
