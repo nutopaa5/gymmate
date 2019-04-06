@@ -30,9 +30,9 @@
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<label for="stylist">Style</label>
 			 <select id="stylist" th:field="*{style}" class="form-control">
-       			<option th:each="style: ${styles}" th:value="${style.categoryid}" th:text="${style.name}"></option>
+       			<option th:each="style: ${styles}" th:value="${style.styleid}" th:text="${style.name}"></option>
 			</select>
-    		<input type="hidden" th:field="*{id}"/>
+    		<input type="hidden" th:field="*{workoutid}"/>
 			
 			<div style="clear: both; display: block; height: 10px;"></div>
 			<input type="submit" value="Save"></input>
