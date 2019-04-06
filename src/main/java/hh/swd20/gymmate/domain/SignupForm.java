@@ -14,11 +14,11 @@ public class SignupForm {
     private String email = "";
 
     @NotEmpty
-    @Size(min=7, max=30)
+    @Size(min=3, max=30)
     private String password = "";
 
     @NotEmpty
-    @Size(min=7, max=30)
+    @Size(min=3, max=30)
     private String passwordCheck = "";
     
     @NotEmpty

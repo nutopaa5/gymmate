@@ -77,7 +77,14 @@ public class WorkoutController {
     @RequestMapping(value = "/delete/{id}", method = RequestMethod.GET)
     public String deleteWorkout(@PathVariable("id") Long workoutId, Model model) {
     	repository.deleteById(workoutId);
-        return "redirect:../booklist";
+        return "redirect:../workoutlist";
+    }
+    
+    // Thumb Up method for workouts
+    @RequestMapping(value = "/thumbup/{id}")
+    public String upWorkout(@PathVariable("id") Long workoutId, Model model) {
+    	model.addAttribute("workout", repository.findById(workoutId));
+    	return "redirect:../workoutlist";
     }
     
     // Edit method for workouts
