@@ -6,7 +6,7 @@ import org.hibernate.validator.constraints.NotEmpty;
 
 public class SignupForm {
     @NotEmpty
-    @Size(min=5, max=30)
+    @Size(min=4, max=30)
     private String username = "";
     
     @NotEmpty

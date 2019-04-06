@@ -82,8 +82,8 @@ public class WorkoutController {
     
     // Thumb Up method for workouts
     @RequestMapping(value = "/thumbup/{id}")
-    public String upWorkout(@PathVariable("id") Long workoutId, Model model) {
-    	model.addAttribute("workout", repository.findById(workoutId));
+    public String upWorkout(@PathVariable("id") Long workoutId, Long thumbup, Model model) {
+    	model.addAttribute("thumbup", repository.findByThumbup(thumbup + 1));
     	return "redirect:../workoutlist";
     }
     

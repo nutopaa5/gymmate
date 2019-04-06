@@ -7,5 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 public interface WorkoutRepository extends CrudRepository<Workout, Long> {
 
     List<Workout> findByTitle(String title);
+    List<Workout> findByThumbup(Long thumbup);
+    List<Workout> findByThumbdown(Long thumbdown);
     
 }
