@@ -33,8 +33,8 @@ public class GymmateApplication {
 			srepo.save(new Style("Cardio"));
 			
 			// Create sample workouts
-			wrepo.save(new Workout("Arnold's Golden Six", "Testing","Do this and this ex.", "1h20m", 0L, 0L, srepo.findByName("Strength").get(0)));
-			wrepo.save(new Workout("Arnold's Golden Six 2", "Testing 2","Then do this and this ex.", "2h10m", 0L, 0L, srepo.findByName("Muscle Mass").get(0)));
+			wrepo.save(new Workout("Arnold's Golden Six", "Testing","Do this and this ex.", "1h20m", 25L, 7L, srepo.findByName("Strength").get(0)));
+			wrepo.save(new Workout("Arnold's Golden Six 2", "Testing 2","Then do this and this ex.", "2h10m", 10L, 2L, srepo.findByName("Muscle Mass").get(0)));
 			
 			// Create users: admin/admin & user/user
 			User user1 = new User("user", "$2a$06$3jYRJrg0ghaaypjZ/.g4SethoeA51ph3UD4kZi9oPkeMTpjKU5uo6", "user@user.com", "USER");

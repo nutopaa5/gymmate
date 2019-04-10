@@ -115,5 +115,11 @@ public class Workout {
 			+ ", instructions=" + instructions + ", duration=" + duration + ", thumbup=" + thumbup + ", thumbdown="
 			+ thumbdown + "]";
 	}
-		
+	public void increaseThumbupByOne() {
+		this.thumbup += 1L;
+	}
+	
+	public void increaseThumbdownByOne() {
+		this.thumbdown += 1L;
+	}
 }

@@ -88,7 +88,24 @@ public class WorkoutController {
     // Thumb Up method for workouts
     @RequestMapping(value = "/thumbup/{id}")
     public String upWorkout(@PathVariable("id") Long workoutId, Long thumbup, Model model) {
-    	model.addAttribute("thumbup", repository.findByThumbup(thumbup + 1L));
+    	//haetaan db :stä päivitettävä workout
+    	Workout workout = repository.findById(workoutId).orElse(null);
+    	//päivitetään workoutin thumbuppia + 1
+    	workout.increaseThumbupByOne();
+    	//tallennetaan repositoryn avulla päivitetty workout db :hen
+    	repository.save(workout);
+    	return "redirect:../workoutlist";
+    }
+    
+    // Thumb Up method for workouts
+    @RequestMapping(value = "/thumbdown/{id}")
+    public String downWorkout(@PathVariable("id") Long workoutId, Long thumbdown, Model model) {
+    	//haetaan db :stä päivitettävä workout
+    	Workout workout = repository.findById(workoutId).orElse(null);
+    	//päivitetään workoutin thumbuppia + 1
+    	workout.increaseThumbdownByOne();
+    	//tallennetaan repositoryn avulla päivitetty workout db :hen
+    	repository.save(workout);
     	return "redirect:../workoutlist";
     }
     
