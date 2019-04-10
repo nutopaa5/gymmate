@@ -25,7 +25,7 @@ public class GymmateApplication {
 	@Bean
 	public CommandLineRunner workoutDemo(WorkoutRepository wrepo, StyleRepository srepo, UserRepository urepo) {
 		return (args) -> {
-			log.info("Save sample workouts");	
+			log.info("Save sample workouts");
 			
 			// Create workout styles
 			srepo.save(new Style("Strength"));
@@ -33,7 +33,7 @@ public class GymmateApplication {
 			srepo.save(new Style("Cardio"));
 			
 			// Create sample workouts
-			wrepo.save(new Workout("Arnold's Golden Six", "Testing","Do this and this ex.", "1h20m", 25L, 7L, srepo.findByName("Strength").get(0)));
+			wrepo.save(new Workout("Arnold's Golden Six", "Testing","Do this and this ex.", "1h20m", 18L, 6L, srepo.findByName("Strength").get(0)));
 			wrepo.save(new Workout("Arnold's Golden Six 2", "Testing 2","Then do this and this ex.", "2h10m", 10L, 2L, srepo.findByName("Muscle Mass").get(0)));
 			
 			// Create users: admin/admin & user/user

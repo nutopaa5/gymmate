@@ -2,8 +2,8 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+ <link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+    <script type="text/javascript" th:src="@{/css/bootstrap.min.js}"></script>
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 <title>Gymmate Home</title>
 </head>
@@ -31,18 +31,25 @@
 		    
 		    <th sec:authorize="hasRole('ADMIN')"></th>
 		</tr>
+		<a href="http://google.com">
+		    <div>
+		        Hello world
+		    </div>
+		</a>
     	<tr th:each = "workout : ${workouts}">
     		<td th:text="${workout.title}"></td>
     		<td th:text="${workout.description}"></td>
     		<td th:text="${workout.instructions}"></td>
     		<td th:text="${workout.duration}"></td>
     		<td th:text="${workout.style.name}"></td>
-    		<td><a th:href="@{/thumbup/{id} (id=${workout.workoutid})}" class="glyphicon glyphicon-thumbs-up fa-2x"></a>&nbsp;<span th:text="${workout.thumbup}" style="font-size:20px;vertical-align:top;"></span></td>
-    		<td><a th:href="@{/thumbdown/{id} (id=${workout.workoutid})}" class="glyphicon glyphicon-thumbs-down fa-2x"></a>&nbsp;<span th:text="${workout.thumbdown}" style="font-size:20px;vertical-align:top;"></span></td>
+    		<td><a th:href="@{/thumbup/{id} (id=${workout.workoutid})}" class="far fa-thumbs-up fa-2x"></a>&nbsp;<span th:text="${workout.thumbup}" style="font-size:22px;vertical-align:top;"></span></td>
+    		<td><a th:href="@{/thumbdown/{id} (id=${workout.workoutid})}" class="far fa-thumbs-down fa-2x"></a>&nbsp;<span th:text="${workout.thumbdown}" style="font-size:22px;vertical-align:top;"></span></td>
     		
     		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id} (id=${workout.workoutid})}" class="btn btn-danger">Delete</a></td>
     		<td sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/edit/{id} (id=${workout.workoutid})}" class="btn btn-info">Edit</a></td>     		
     	</tr>
+    	
+    	
      </table>
      <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-success" href="/addworkout">Add Workout</a> 
 </body>
