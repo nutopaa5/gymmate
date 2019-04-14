@@ -5,8 +5,16 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
     <script type="text/javascript" th:src="@{/css/bootstrap.min.css}"></script>
+    <link href='https://fonts.googleapis.com/css?family=Chivo' rel='stylesheet'>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 <body>
+<div class="container">
+	<div class="row">
+		<div class="col-sm-8" style="padding-top:40px;padding-bottom:10px">
+			<img th:src="@{/css/Logo.png}"/>&nbsp;&nbsp;&nbsp;<i style="vertical-align:middle;"class="fas fa-dumbbell fa-4x"></i>
+		</div>
+	</div>
 	<h1>Add workout</h1>
 	<div>
 		<form th:object="${workout}" th:action="@{save}" action="#" method="post">
@@ -28,10 +36,11 @@
        			<option th:each="style: ${styles}" th:value="${style.styleid}" th:text="${style.name}"></option>
     		</select>
 			
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<input type="submit" value="Save" class="btn btn-success"></input>
-			<a href="/workoutlist"><input type="button" value="Cancel add" class="btn btn-danger"/></a>
+			<div style="clear: both; display: block; height: 20px;"></div>
+			<input type="submit" value="Save" class="btn btn-purple"></input>
+			<a href="/workoutlist"><input type="button" value="Cancel add" class="btn btn-dark"/></a>
 		</form>
 	</div>
+</div>
 </body>
 </html>
