@@ -80,10 +80,6 @@ public class WorkoutController {
         return "redirect:../workoutlist";
     }
     
-    // model.addAttribute("thumbup", repository.findByThumbup(thumbup+1));
-    
-    // long total = thumbup + 1;
-	// model.addAttribute("thumbup", total);
     
     // Thumb Up method for workouts
     @RequestMapping(value = "/thumbup/{id}")
@@ -97,7 +93,7 @@ public class WorkoutController {
     	return "redirect:../workoutlist";
     }
     
-    // Thumb Up method for workouts
+    // Thumb Down method for workouts
     @RequestMapping(value = "/thumbdown/{id}")
     public String downWorkout(@PathVariable("id") Long workoutId, Long thumbdown, Model model) {
     	//haetaan db :stä päivitettävä workout
