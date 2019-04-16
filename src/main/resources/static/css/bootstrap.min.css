@@ -10,6 +10,8 @@ body {
 	background-image:url("../css/bg.jpg");
 	background-color:#fff;
 	background-size:cover;
+	background-repeat:no-repeat;
+	background-position:center center;
 }
 
 .fa-dumbbell {
