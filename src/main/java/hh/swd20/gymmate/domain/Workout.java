@@ -6,7 +6,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import hh.swd20.gymmate.domain.Style;
@@ -14,25 +18,36 @@ import hh.swd20.gymmate.domain.Style;
 @Entity
 public class Workout {
 
-	// attribuutit
+	// Attributes and validations
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
 	private long workoutid;
+	
+
+	@Size(min=1, max=40, message="Title must be between 1 and 40 characters")
 	private String title;
+	
+	@Size(min=1, max=100, message="Description must be between 1 and 100 characters")
 	private String description;
+	
+	@Size(min=1, max=255, message="Instructions must be between 1 and 255 characters")
 	private String instructions;
+	
+	@Size(min=1, max=10, message="Duration must be between 1 and 10 characters")
 	private String duration;
+	
 	private long thumbup;
+	
 	private long thumbdown;
 		
 	@ManyToOne
-	@JsonIgnore
+	@JsonBackReference
 	@JoinColumn(name="styleid")
 	private Style style;
 		
-	// konstruktorit
+	// Constructors
 	public Workout() { 
-		// parametritön konstruktori
+		//
 	}
 		
 	public Workout(String title, String description, String instructions, String duration, long thumbup, long thumbdown, Style style) {
@@ -46,7 +61,7 @@ public class Workout {
 		this.style = style;
 	}
 	
-	// getterit
+	// Getters
 	public long getWorkoutid() {
 		return workoutid;
 	}
@@ -69,7 +84,7 @@ public class Workout {
 		return thumbup;
 	}
 	
-	//setterit
+	// Setters
 	public void setId(long workoutid) {
 		this.workoutid = workoutid;
 	}
@@ -95,7 +110,7 @@ public class Workout {
 		this.thumbdown = thumbdown;
 	}
 	
-	// stylen set & get
+	// Style's set & get
 	public Style getStyle() {
 		return style;
 	}
@@ -103,7 +118,7 @@ public class Workout {
 		this.style = style;
 	}
 
-	// muut methodit
+	// Other methods
 	@Override
 	public String toString() {
 		if (this.style != null)
@@ -114,11 +129,14 @@ public class Workout {
 			return "Workout [workoutid=" + workoutid + ", title=" + title + ", description=" + description
 			+ ", instructions=" + instructions + ", duration=" + duration + ", thumbup=" + thumbup + ", thumbdown="
 			+ thumbdown + "]";
+	
+	// Thumb Up value + 1
 	}
 	public void increaseThumbupByOne() {
 		this.thumbup += 1L;
 	}
 	
+	// Thumb Down value + 1
 	public void increaseThumbdownByOne() {
 		this.thumbdown += 1L;
 	}

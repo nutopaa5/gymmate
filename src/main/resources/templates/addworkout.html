@@ -1,44 +1,61 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <head>
-    <title>Gymmate</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
     <script type="text/javascript" th:src="@{/css/bootstrap.min.css}"></script>
     <link href='https://fonts.googleapis.com/css?family=Chivo' rel='stylesheet'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+    
+    <title>GYMMATE - Add Workout</title>
 </head>
+
 <body>
+
 <div class="container">
 	<div class="row">
-		<div class="col-sm-8" style="padding-top:40px;padding-bottom:10px">
+		<div class="col-sm-8" style="padding-top:40px;padding-bottom:10px;">
 			<img th:src="@{/css/Logo.png}"/>&nbsp;&nbsp;&nbsp;<i style="vertical-align:middle;"class="fas fa-dumbbell fa-4x"></i>
 		</div>
 	</div>
-	<h1>Add workout</h1>
+	
+	<h1 style="color:#fff">Add workout</h1>
+	
+	<!-- Form for adding workout -->
 	<div>
 		<form th:object="${workout}" th:action="@{save}" action="#" method="post">
-		  	<label for="title">Title</label>
+		
+		  	<label for="title" style="color:#fff">Title</label>
 			<input type="text" id="title" th:field="*{title}" class="form-control"/>
-			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="description">Description</label>
-			<input type="text" id="description" th:field="*{description}" class="form-control"/>
-			<div style="clear: both; display: block; height: 10px;"></div>
-		  	<label for="instructions">Instructions</label>
-			<textarea rows=7 id="instructions" th:field="*{instructions}" class="form-control"/>
-			<div style="clear: both; display: block; height: 10px;"></div>
-			<label for="duration">Duration</label>
-			<input type="text" id="duration" th:field="*{duration}" class="form-control"/>
+			<p th:if="${#fields.hasErrors('title')}" th:errors="*{title}" style="color:orange;font-weight:bold">Title Error</p>
 			<div style="clear: both; display: block; height: 10px;"></div>
 			
-			<label for="stylist">Style</label>
+		  	<label for="description" style="color:#fff">Description</label>
+			<input type="text" id="description" th:field="*{description}" class="form-control"/>
+			<p th:if="${#fields.hasErrors('description')}" th:errors="*{description}" style="color:orange;font-weight:bold">Description Error</p>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+		  	<label for="instructions" style="color:#fff">Instructions</label>
+			<textarea rows=7 id="instructions" th:field="*{instructions}" class="form-control"/>
+			<p th:if="${#fields.hasErrors('instructions')}" th:errors="*{instructions}" style="color:orange;font-weight:bold">Instructions Error</p>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="duration" style="color:#fff">Duration</label>
+			<input type="text" id="duration" th:field="*{duration}" class="form-control"/>
+			<p th:if="${#fields.hasErrors('duration')}" th:errors="*{duration}" style="color:orange;font-weight:bold">Duration Error</p>
+			<div style="clear: both; display: block; height: 10px;"></div>
+			
+			<label for="stylist" style="color:#fff">Style</label>
 			 <select id="stylist" th:field="*{style}" class="form-control">
        			<option th:each="style: ${styles}" th:value="${style.styleid}" th:text="${style.name}"></option>
     		</select>
 			
+			<!-- Form buttons -->
 			<div style="clear: both; display: block; height: 20px;"></div>
 			<input type="submit" value="Save" class="btn btn-purple"></input>
 			<a href="/workoutlist"><input type="button" value="Cancel add" class="btn btn-dark"/></a>
+			
 		</form>
 	</div>
 </div>

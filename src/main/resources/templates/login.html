@@ -6,7 +6,7 @@
     <link href='https://fonts.googleapis.com/css?family=Chivo' rel='stylesheet'>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
     <head>
-        <title>Gymmate Login</title>
+        <title>GYMMATE - Login</title>
     </head>
     <body>
     <div class="container">
@@ -14,21 +14,36 @@
     		<div class="col-sm-8" style="padding-top:40px;padding-bottom:20px">
 			<img th:src="@{/css/Logo.png}"/>&nbsp;&nbsp;&nbsp;<i style="vertical-align:middle;"class="fas fa-dumbbell fa-4x"></i>
 		</div>
-    	</div>
-        <div th:if="${param.error}">
+		</div>
+        
+        <!-- Login form and error definitions -->
+        <div>
+        <div th:if="${param.error}" style="color:#fff">
             Invalid username and password.
         </div>
-        <div th:if="${param.logout}">
+        <div th:if="${param.logout}" style="color:#fff">
             You have been logged out.
         </div>
+        <h1 style="color:#fff">Login</h1>
+        
         <form th:action="@{/login}" method="post">
-            <div><label> User Name : <input type="text" name="username" class="form-control"/> </label></div>
-            <div><label> Password: <input type="password" name="password" class="form-control"/> </label></div>
             <div>
-            <input type="submit" value="Login" class="btn btn-purple"/>
+            	<label style="color:#fff"> User Name : <input type="text" name="username" class="form-control"/> </label>
+            </div>
+            <div>
+           	 	<label style="color:#fff"> Password: <input type="password" name="password" class="form-control"/> </label>
+            </div>
+            
+            <!-- Form buttons -->
+            <div>
+            <input type="submit" value="Login" class="btn btn-dark"/>
+            <a href="/workoutlist"><input type="button" value="Home" class="btn btn-dark"/></a>
             <a href="/signup"><input type="button" value="Register" class="btn btn-purple"/></a>
            	</div>
+           	
         </form>
+        </div>
+        
        </div>
     </body>
 </html>

@@ -1,79 +1,93 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<mvc:resources mapping="/*.css" location="/resources/css/" />
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
- <link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
- <script type="text/javascript" th:src="@{/css/bootstrap.min.js}"></script>
-
-<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-<link href='https://fonts.googleapis.com/css?family=Chivo' rel='stylesheet'>
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
-<title>GYMMATE</title>
+	<link type="text/css"rel="stylesheet" href="css/bootstrap.min.css" th:href="@{css/bootstrap.min.css}" />
+	<script type="text/javascript" th:src="@{/css/bootstrap.min.js}"></script>
+	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+	<link href='https://fonts.googleapis.com/css?family=Chivo' rel='stylesheet'>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+	<title>GYMMATE - Home</title>
 </head>
+
 <body>
-<div class="container">
-	<div class="row">
-		<div class="col-sm-8" style="padding-top:40px;padding-bottom:20px">
-			<img th:src="@{/css/Logo.png}"/>&nbsp;&nbsp;&nbsp;<i style="vertical-align:middle;"class="fas fa-dumbbell fa-4x"></i>
-		</div>
-		<div class="col-sm-2" style="padding-top:55px">
-			<h3 th:inline="text"><span class="far fa-user"></span>&nbsp;[[${#httpServletRequest.remoteUser}]]</h3>
-		</div>
-		<div class="col-sm-2" style="padding-top:55px">
-			<form th:action="@{/logout}" method="post">
-				<input type="submit" value="Logout" class="btn btn-dark"/>
-			</form>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-sm-10" style="padding-bottom:20px">
-			<a href="/workoutlist">
-				<input type="submit" value="Refresh List" class="btn btn-purple"/>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8" style="padding-top:40px;padding-bottom:20px">
+				<img th:src="@{/css/Logo.png}"/>&nbsp;&nbsp;&nbsp;<i style="vertical-align:middle;"class="fas fa-dumbbell fa-4x"></i>
+			</div>
+			<!-- Authenticated user info and avatar -->
+			<div class="col" style="padding-top:55px">
+				<h3 th:inline="text"><span class="far fa-user" sec:authorize="isAuthenticated()"></span>&nbsp;[[${#httpServletRequest.remoteUser}]]</h3>
+			
+			<!-- Login and logout buttons -->
+			<div class="row" style="padding-left:10px">
+			<a href="/login" sec:authorize="!isAuthenticated()">
+					<input type="submit" value="Login" class="btn btn-dark"/>
 			</a>
+				<form th:action="@{/logout}" method="post" sec:authorize="isAuthenticated()">
+					<input type="submit" value="Logout" class="btn btn-dark"/>
+				</form>
+			</div>
+			</div>
 		</div>
-	</div>
-	
-	<div id="accordion">
+		
+		<!-- Refresh and Add Workout buttons -->
+		<div class="row">
+			<div class="col-sm-10" style="padding-bottom:20px">
+				<a href="/workoutlist"><input type="submit" value="Refresh List" class="btn btn-purple"/></a>
+				<a sec:authorize="hasAuthority('ADMIN')" style="margin-left:8px"class="btn btn-purple" href="/addworkout">Add Workout</a>
+			</div>
+		</div>
+		
+		<!-- Bootstrap Accordion collapse with data th:block -->
+		<div class="form-group">
+		<div id="accordion">
 		<th:block th:each="workout: ${workouts}">
-	  <div class="card">
-	    <div class="card-header" th:id="heading+${workout.getWorkoutid()}">
-	      <h5 class="mb-0">
-	        <button style="padding-left:0px;color:#000;font-size:19px" th:text="${workout.title}" class="btn btn-link" data-toggle="collapse" th:data-target="'#collapse'+${workout.getWorkoutid()}" aria-expanded="true" th:aria-controls="collapse+${workout.getWorkoutid()}">
-	        </button>
-	      </h5>
-	    </div>
-	
-	    <div th:id="collapse+${workout.getWorkoutid()}" class="collapse show" th:aria-labelledby="heading+${workout.getWorkoutid()}" data-parent="#accordion">
-	      <div class="card-body">
-		      <div class="row">
-			  	<div class="col"><b>Description</b></div>
-			  	<div class="col"><b>Duration</b></div>
-			  	<div class="col"><b>Style</b></div>
-			  	<div class="col col-lg-2" style="color:#49247A;"><b>Rating</b></div>
+		  <div class="card">
+		    <div class="card-header" th:id="heading+${workout.getWorkoutid()}" style="background-color:lightgray">
+		      <h5 class="mb-0">
+		        <button style="padding-left:0px;color:#17191c;font-size:19px" th:text="${workout.title}" class="btn btn-link" data-toggle="collapse" th:data-target="'#collapse'+${workout.getWorkoutid()}" aria-expanded="true" th:aria-controls="collapse+${workout.getWorkoutid()}">
+		        </button>
+		      </h5>
+		    </div>
+		    <div th:id="collapse+${workout.getWorkoutid()}" class="collapse show" th:aria-labelledby="heading+${workout.getWorkoutid()}" data-parent="#accordion">
+		      <div class="card-body" style="background-color:#e3e5e8">
+			      <div class="row">
+				  	<div class="col" style="color:#49247A;"><b>Description</b></div>
+				  	<div class="col" style="color:#49247A;"><b>Duration</b></div>
+				  	<div class="col" style="color:#49247A;"><b>Style</b></div>
+				  	<div class="col col-lg-2" style="color:#49247A;"><b>Rating</b></div>
+				  </div>
+				  <div class="row">
+				  	<div class="col" style="color:#17191c;" th:text="${workout.description}">Description</div>
+				  	<div class="col" style="color:#17191c; "th:text="${workout.duration}">Duration</div>
+				  	<div class="col"style="color:#17191c;"  th:text="${workout.style.name}">Style</div>
+				  	<!-- Thumb Up -->
+				  	<div class="col col-lg-2" ><a th:href="@{/thumbup/{id} (id=${workout.workoutid})}" class="far fa-thumbs-up fa-2x" style="color:#49247A;"></a>&nbsp;<span th:text="${workout.thumbup}" style="font-size:22px;vertical-align:top;"></span>
+				  	<!-- Thumb Down -->
+	    			&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/thumbdown/{id} (id=${workout.workoutid})}" class="far fa-thumbs-down fa-2x" style="color:#49247A;"></a>&nbsp;<span th:text="${workout.thumbdown}" style="font-size:22px;vertical-align:top;"></span></div>
+				  </div>
+				  <div class="row">
+				  	<div class="col-10" style="margin-top:10px;color:#49247A;"><b>Instructions</b></div>
+				  	<p style="white-space: pre;" class="col-10" th:text="${workout.instructions}">Instructions</p>
+				  	
+				  	<!-- Delete and edit buttons -->
+				  	<div class="col col-lg-2" style="margin-top:0;" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id} (id=${workout.workoutid})}" class="btn btn-dark">Delete</a>
+	    			&nbsp;&nbsp;<a th:href="@{/edit/{id} (id=${workout.workoutid})}" class="btn btn-purple">Edit</a></div>
+				  </div>
 			  </div>
-			  <div class="row">
-			  	<div class="col" th:text="${workout.description}"></div>
-			  	<div class="col" th:text="${workout.duration}"></div>
-			  	<div class="col" th:text="${workout.style.name}"></div>
-			  	<div class="col col-lg-2" ><a th:href="@{/thumbup/{id} (id=${workout.workoutid})}" class="far fa-thumbs-up fa-2x" style="color:#49247A;"></a>&nbsp;<span th:text="${workout.thumbup}" style="font-size:22px;vertical-align:top;"></span>
-    			&nbsp;&nbsp;&nbsp;&nbsp;<a th:href="@{/thumbdown/{id} (id=${workout.workoutid})}" class="far fa-thumbs-down fa-2x" style="color:#49247A;"></a>&nbsp;<span th:text="${workout.thumbdown}" style="font-size:22px;vertical-align:top;"></span></div>
-			  </div>
-			  <div class="row">
-			  	<div class="col-10" style="margin-top:10px;"><b>Instructions</b></div>
-			  	<p style="white-space: pre;" class="col-10" th:text="${workout.instructions}"></p>
-			  	<div class="col col-lg-2" style="margin-top:0;" sec:authorize="hasAuthority('ADMIN')"><a th:href="@{/delete/{id} (id=${workout.workoutid})}" class="btn btn-dark">Delete</a>
-    			&nbsp;&nbsp;<a th:href="@{/edit/{id} (id=${workout.workoutid})}" class="btn btn-purple">Edit</a></div>
-			  </div>
+		     </div>
+		    </div>
 		  </div>
-	     </div>
-	    </div>
-	  </div>
-  		</th:block>
-    <div class="col-md-4" style="padding:20px 0">
-     <a sec:authorize="hasAuthority('ADMIN')" class="btn btn-purple" href="/addworkout">Add Workout</a>
-     </div>
-</div>
+	  	</th:block>
+	  	</div>
+	    
+	</div>
 </body>
+
 </html>

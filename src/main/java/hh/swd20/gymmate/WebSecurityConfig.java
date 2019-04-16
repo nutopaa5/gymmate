@@ -7,6 +7,7 @@ import org.springframework.security.config.annotation.method.configuration.Enabl
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import hh.swd20.gymmate.web.UserDetailServiceImpl;
 
@@ -19,9 +20,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailServiceImpl userDetailsService;	
 	
+    // Permitting and authorization
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
+        .authorizeRequests().antMatchers("/workoutlist").permitAll()
+        .and()
+        .authorizeRequests().antMatchers("/thumbup/*").permitAll()
+        .and()
+        .authorizeRequests().antMatchers("/thumbdown/*").permitAll()
+        .and()
         .authorizeRequests().antMatchers("/css/**").permitAll() // Enable css when logged out
         .and()
         .authorizeRequests().antMatchers("/delete/*").hasRole("ADMIN")
@@ -42,12 +50,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           .anyRequest().authenticated()
           .and()
       .formLogin()
-          .loginPage("/login")
           .defaultSuccessUrl("/workoutlist")
           .permitAll()
+          .loginPage("/login")
+          .permitAll()
           .and()
+          
       .logout()
-          .permitAll();
+      .logoutSuccessUrl("/workoutlist")
+      .permitAll();
+      
     }
     
     @Autowired

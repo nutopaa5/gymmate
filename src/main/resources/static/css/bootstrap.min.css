@@ -7,7 +7,15 @@
 /*# sourceMappingURL=bootstrap.min.css.map */
 body {
 	font-family: 'Chivo';
+	background-image:url("../css/bg.jpg");
+	background-color:#fff;
+	background-size:cover;
 }
+
+.fa-dumbbell {
+	color: #161616;
+}
+
 .btn-purple { 
   color: #ffffff; 
   background-color: #582996; 
@@ -27,7 +35,7 @@ body {
 .btn-purple:active, 
 .btn-purple.active, 
 .open .dropdown-toggle.btn-purple { 
-  background-image: none; 
+	background-image:none;
 } 
  
 .btn-purple.disabled, 
@@ -55,9 +63,8 @@ fieldset[disabled] .btn-purple.active {
 }
 
 [code]
-
-a {
-  color: #582996;
+.greydb {
+	color:#A4A4A4;
 }
 
 [/code]

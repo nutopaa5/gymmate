@@ -3,21 +3,27 @@ package hh.swd20.gymmate.web;
 import java.util.List;
 import java.util.Optional;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import hh.swd20.gymmate.domain.Style;
 import hh.swd20.gymmate.domain.StyleRepository;
 import hh.swd20.gymmate.domain.WorkoutRepository;
 import hh.swd20.gymmate.domain.Workout;
 
 @Controller
+@CrossOrigin
 public class WorkoutController {
 
 	@Autowired
@@ -68,7 +74,12 @@ public class WorkoutController {
 	
     // Save method for workouts
     @RequestMapping(value = "/save", method = RequestMethod.POST)
-    public String save(Workout workout){
+    public String save(@Valid Workout workout, BindingResult bindingResult, Model model){
+    	model.addAttribute("styles", srepository.findAll());
+    	//Check for errors in form
+    	if (bindingResult.hasErrors()) {
+            return "addworkout";
+        }
         repository.save(workout);
         return "redirect:workoutlist";
     }
@@ -106,6 +117,7 @@ public class WorkoutController {
     }
     
     // Edit method for workouts
+    @PreAuthorize("hasAuthority('ADMIN')")
     @RequestMapping(value = "/edit/{id}")
     public String editWorkout(@PathVariable("id") Long workoutId, Model model) {
     	model.addAttribute("workout", repository.findById(workoutId));
