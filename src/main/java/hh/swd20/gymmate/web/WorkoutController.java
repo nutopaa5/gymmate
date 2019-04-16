@@ -31,8 +31,8 @@ public class WorkoutController {
 	
 	@Autowired
 	private StyleRepository srepository;
-
-	// Show all workouts
+	
+	// Login
     @RequestMapping(value="/login")
     public String login() {	
         return "login";

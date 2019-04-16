@@ -21,23 +21,23 @@
 	
 	<!-- Registration form -->
      <div>
-     <h1>Register</h1>
+     <h1 style="color:#fff">Register</h1>
 		<form th:object="${signupform}" th:action="@{/saveuser}" action="#" method="post">
 			<div>
-				<label> Username :<input type="text" th:field="*{username}" class="form-control"/></label>
-				<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}">Username Error</p>	
+				<label style="color:#fff"> Username :<input type="text" th:field="*{username}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('username')}" th:errors="*{username}" style="color:#fff">Username Error</p>	
 			</div>
 			<div>
-				<label> Email :<input type="text" th:field="*{email}" class="form-control"/></label>
-				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Email Error</p>	
+				<label style="color:#fff"> Email :<input type="text" th:field="*{email}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('email')}" th:errors="*{email}" style="color:#fff">Email Error</p>	
 			</div>
 			<div>
-				<label> Password :<input type="password" th:field="*{password}" class="form-control"/></label>
-				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</p>	
+				<label style="color:#fff"> Password :<input type="password" th:field="*{password}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('password')}" th:errors="*{password}" style="color:#fff">Password Error</p>	
 			</div>
 			<div>
-				<label> Re-type Password: <input type="password" th:field="*{passwordCheck}" class="form-control"/></label>
-				<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}">Password Match Error</p>	
+				<label style="color:#fff"> Re-type Password: <input type="password" th:field="*{passwordCheck}" class="form-control"/></label>
+				<p th:if="${#fields.hasErrors('passwordCheck')}" th:errors="*{passwordCheck}" style="color:#fff">Password Match Error</p>	
 			</div>
 			
 			<!-- Form buttons -->
