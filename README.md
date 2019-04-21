@@ -7,5 +7,5 @@ Background image taken from Pixabay.
 </p>
 <p>
 For testing purposes:<br/>
-https://thgymmate.herokuapp.com/gymmate<br/>
+[go](https://thgymmate.herokuapp.com/gymmate){:target="_blank"}<br/>
 </p>
