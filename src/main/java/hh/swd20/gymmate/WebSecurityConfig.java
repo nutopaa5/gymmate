@@ -20,6 +20,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private UserDetailServiceImpl userDetailsService;	
 	
+    @Autowired
+    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
+        auth.inMemoryAuthentication().withUser("user")
+        .password("user").roles("USER");
+        auth.inMemoryAuthentication().withUser("admin")
+        .password("admin").roles("ADMIN");
+    }
+    
     // Permitting and authorization
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -62,8 +71,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
       
     }
     
-    @Autowired
-    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
-    }
 }

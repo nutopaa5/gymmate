@@ -33,6 +33,12 @@ public class WorkoutController {
 	private StyleRepository srepository;
 	
 	// Login
+    @RequestMapping(value="/gymmate", method = RequestMethod.GET)
+    public String gymmate(Model model) {
+    	model.addAttribute("workouts", repository.findAll());
+        return "workoutlist";
+    }
+    
     @RequestMapping(value="/login")
     public String login() {	
         return "login";
